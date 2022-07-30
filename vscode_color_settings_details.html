@@ -1,0 +1,2248 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Contrast Colors</title>
+<script>
+        /*
+   @param time: the exact amount of time the scrolling will take (in milliseconds)
+   @param pos: the y-position to scroll to (in pixels)
+*/
+function scrollToSmoothly(pos, time) {
+    var currentPos = window.pageYOffset;
+    var start = null;
+    if(time == null) time = 500;
+    pos = +pos, time = +time;
+    window.requestAnimationFrame(function step(currentTime) {
+        start = !start ? currentTime : start;
+        var progress = currentTime - start;
+        if (currentPos < pos) {
+            window.scrollTo(0, ((pos - currentPos) * progress / time) + currentPos);
+        } else {
+            window.scrollTo(0, currentPos - ((currentPos - pos) * progress / time));
+        }
+        if (progress < time) {
+            window.requestAnimationFrame(step);
+        } else {
+            window.scrollTo(0, pos);
+        }
+    });
+}
+</script>
+<script>
+document.getElementById("gototop").addEventListener('click', function(e){
+	smoothScroll({toElement: document.getElementById('tablecontents')});
+});
+</script>
+
+
+
+<style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+body {
+        font-family: Consolas;
+        padding-left: 15%;
+        padding-right: 15%;
+        font-size: 0.75em;
+}
+h3 {
+        padding: 0;
+        margin: 10px 0 10px 0;
+}
+h4 {
+        font-size: 1.25rem;
+}
+pre {
+        background-color: rgba(0,0,0,0.04);
+        padding: 10px;
+        border: 1px solid rgba(0,0,0,0.25);
+        box-shadow: 0px 8px 5px -5px rgba(0,0,0,0.15);
+        margin-top: 0;
+}
+code{
+        color: rgba(35,15,25,1);
+        font-weight: bold;
+        font-family: "Consolas";
+}
+p .subHead {
+        font-family: "Trebuchet MS";
+        font-size: 14px;
+        line-height: 20px;
+        font-style: normal;
+        margin: 30px;
+}
+p.desc {
+        margin-top: 20px;
+        border-top: 1px solid rgba(0,0,0,0.15);
+        padding-top: 5px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-bottom: 0;
+        background-color: rgba(0,0,0,0.02);
+        font-family: "Trebuchet MS";
+}
+hr {
+        margin: 60px 0 60px 0;
+}
+#tablecontents {
+        font-size: 2rem;
+        border: none;
+}
+#gototop {
+        position: fixed;
+        right: 10px;
+        bottom: 10px;
+        z-index: 10;
+        font-size: 2em;
+        border-radius: 5px;
+        background-color: rgba(240,240,240,0.75);
+        opacity: 0.5;
+}
+#gototoptop {
+        position: fixed;
+        right: 10px;
+        top: 10px;
+        z-index: 10;
+        font-size: 2em;
+        border-radius: 5px;
+        background-color: rgba(240,240,240,0.75);
+        opacity: 0.5;
+}
+</style>
+
+</head>
+<body class="vscode-body vscode-light">
+<p id = "tablecontents">Table Of Contents</p>
+<button id = "gototop" onclick="scrollToSmoothly(document.getElementById('ports-colors').offsetTop, 500)">Bottom</button>
+<button id = "gototoptop" onclick="scrollToSmoothly(0, 500)">Top</button>
+<!-- code_chunk_output -->
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('contrast-colors').offsetTop, 500)">Contrast Colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('base-colors').offsetTop, 500)">Base colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('window-border').offsetTop, 500)">Window border</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('text-colors').offsetTop, 500)">Text colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('action-colors').offsetTop, 500)">Action colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('button-control').offsetTop, 500)">Button control</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('dropdown-control').offsetTop, 500)">Dropdown control</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('input-control').offsetTop, 500)">Input control</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('scrollbar-control').offsetTop, 500)">Scrollbar control</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('badge').offsetTop, 500)">Badge</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('progress-bar').offsetTop, 500)">Progress bar</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('lists-and-trees').offsetTop, 500)">Lists and trees</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('activity-bar').offsetTop, 500)">Activity Bar</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('side-bar').offsetTop, 500)">Side Bar</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('minimap').offsetTop, 500)">Minimap</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('editor-groups-tabs').offsetTop, 500)">Editor Groups & Tabs</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('editor-colors').offsetTop, 500)">Editor colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('diff-editor-colors').offsetTop, 500)">Diff editor colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('editor-widget-colors').offsetTop, 500)">Editor widget colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('peek-view-colors').offsetTop, 500)">Peek view colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('merge-conflicts-colors').offsetTop, 500)">Merge conflicts colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('panel-colors').offsetTop, 500)">Panel colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('status-bar-colors').offsetTop, 500)">Status Bar colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('menu-bar-colors').offsetTop, 500)">Menu Bar colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('command-center-colors').offsetTop, 500)">Command Center colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('notification-colors').offsetTop, 500)">Notification colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('banner-colors').offsetTop, 500)">Banner colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('extensions-colors').offsetTop, 500)">Extensions colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('quick-picker-colors').offsetTop, 500)">Quick picker colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('keybinding-label-colors').offsetTop, 500)">Keybinding label colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('keyboard-shortcut-table-colors').offsetTop, 500)">Keyboard shortcut table colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('integrated-terminal-colors').offsetTop, 500)">Integrated Terminal colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('_debug-colors').offsetTop, 500)">_Debug colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('testing-colors').offsetTop, 500)">Testing colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('welcome-page-colors').offsetTop, 500)">Welcome page colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('source-control-colors').offsetTop, 500)">Source Control colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('git-colors').offsetTop, 500)">Git colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('settings-editor-colors').offsetTop, 500)">Settings Editor colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('breadcrumbs-colors').offsetTop, 500)">Breadcrumbs colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('snippets-colors').offsetTop, 500)">Snippets colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('symbol-icons-colors').offsetTop, 500)">Symbol Icons colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('_debug-icons-colors').offsetTop, 500)">_Debug Icons colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('notebook-colors').offsetTop, 500)">Notebook colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('chart-colors').offsetTop, 500)">Chart colors</a></h3>
+<h3><a href="#" onclick="scrollToSmoothly(document.getElementById('ports-colors').offsetTop, 500)">Ports Colors</a></h3>
+<!-- /code_chunk_output -->
+<br />
+<br />
+<br />
+<br />
+<h4 id="contrast-colors">Contrast Colors</h4>
+<p class="desc"><em>An extra border around active elements to separate them from others for greater contrast.</em></p>
+<pre><code>        &quot;contrastActiveBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>An extra border around elements to separate them from others for greater contrast.</em></p>
+<pre><code>        &quot;contrastBorder&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="base-colors">Base colors</h4>
+<p class="desc"><em>Overall border color for focused elements. This color is only used if not overridden by a component.</em></p>
+<pre><code>        &quot;focusBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Overall foreground color. This color is only used if not overridden by a component.</em></p>
+<pre><code>        &quot;foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Overall foreground for disabled elements. This color is only used if not overridden by a component.</em></p>
+<pre><code>        &quot;disabledForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Shadow color of widgets such as Find/Replace inside the editor.</em></p>
+<pre><code>        &quot;widget.shadow&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of text selections in the workbench (for input fields or text areas, does not apply to selections within the editor and the terminal).</em></p>
+<pre><code>        &quot;selection.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color for description text providing additional information, for example for a label.</em></p>
+<pre><code>        &quot;descriptionForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Overall foreground color for error messages (this color is only used if not overridden by a component).</em></p>
+<pre><code>        &quot;errorForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The default color for icons in the workbench.</em></p>
+<pre><code>        &quot;icon.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The hover border color for draggable sashes.</em></p>
+<pre><code>        &quot;sash.hoverBorder&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="window-border">Window border</h4>
+<p><span class="subHead">The theme colors for VS Code window border.</span class="subHead"></p>
+<p class="desc"><em>Border color for the active (focused) window.</em></p>
+<pre><code>        &quot;window.activeBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color for the inactive (unfocused) windows.</em></p>
+<pre><code>        &quot;window.inactiveBorder&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="text-colors">Text colors</h4>
+<p><span class="subHead">Colors inside a text document, such as the welcome page.</span class="subHead"></p>
+<p class="desc"><em>Background color for block quotes in text.</em></p>
+<pre><code>        &quot;textBlockQuote.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color for block quotes in text.</em></p>
+<pre><code>        &quot;textBlockQuote.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color for code blocks in text.</em></p>
+<pre><code>        &quot;textCodeBlock.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color for links in text when clicked on and on mouse hover.</em></p>
+<pre><code>        &quot;textLink.activeForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color for links in text.</em></p>
+<pre><code>        &quot;textLink.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color for preformatted text segments.</em></p>
+<pre><code>        &quot;textPreformat.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color for text separators.</em></p>
+<pre><code>        &quot;textSeparator.foreground&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="action-colors">Action colors</h4>
+<p><span class="subHead">A set of colors to control the interactions with actions across the workbench.</span class="subHead"></p>
+<p class="desc"><em>Toolbar background when hovering over actions using the mouse</em></p>
+<pre><code>        &quot;toolbar.hoverBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Toolbar outline when hovering over actions using the mouse</em></p>
+<pre><code>        &quot;toolbar.hoverOutline&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Toolbar background when holding the mouse over actions</em></p>
+<pre><code>        &quot;toolbar.activeBackground&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="button-control">Button control</h4>
+<p><span class="subHead">A set of colors for button widgets such as Open Folder button in the Explorer of a new window.</span class="subHead">
+<p class="desc"><em>Button background color.</em></p>
+<pre><code>        &quot;button.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Button foreground color.</em></p>
+<pre><code>        &quot;button.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Button border color.</em></p>
+<pre><code>        &quot;button.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Button background color when hovering.</em></p>
+<pre><code>        &quot;button.hoverBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Secondary button foreground color.</em></p>
+<pre><code>        &quot;button.secondaryForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Secondary button background color.</em></p>
+<pre><code>        &quot;button.secondaryBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Secondary button background color when hovering.</em></p>
+<pre><code>        &quot;button.secondaryHoverBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of checkbox widget.</em></p>
+<pre><code>        &quot;checkbox.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color of checkbox widget.</em></p>
+<pre><code>        &quot;checkbox.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color of checkbox widget.</em></p>
+<pre><code>        &quot;checkbox.border&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="dropdown-control">Dropdown control</h4>
+<p><span class="subHead">A set of colors for all Dropdown widgets such as in the Integrated Terminal or the Output panel. Note that the Dropdown control is not used on macOS currently.</span class="subHead">
+<p class="desc"><Dropdown control: em>Dropdown background.</em></p>
+<pre><code>        &quot;dropdown.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Dropdown list background.</em></p>
+<pre><code>        &quot;dropdown.listBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Dropdown border.</em></p>
+<pre><code>        &quot;dropdown.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Dropdown foreground.</em></p>
+<pre><code>        &quot;dropdown.foreground&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="input-control">Input control</h4>
+<p><span class="subHead">Colors for input controls such as in the Search view or the Find/Replace dialog.</span class="subHead">
+<p class="desc"><em>Input box background.</em></p>
+<pre><code>        &quot;input.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Input box border.</em></p>
+<pre><code>        &quot;input.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Input box foreground.</em></p>
+<pre><code>        &quot;input.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Input box foreground color for placeholder text.</em></p>
+<pre><code>        &quot;input.placeholderForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of activated options in input fields.</em></p>
+<pre><code>        &quot;inputOption.activeBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color of activated options in input fields.</em></p>
+<pre><code>        &quot;inputOption.activeBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color of activated options in input fields.</em></p>
+<pre><code>        &quot;inputOption.activeForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of activated options in input fields.</em></p>
+<pre><code>        &quot;inputOption.hoverBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Input validation background color for error severity.</em></p>
+<pre><code>        &quot;inputValidation.errorBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Input validation foreground color for error severity.</em></p>
+<pre><code>        &quot;inputValidation.errorForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Input validation border color for error severity.</em></p>
+<pre><code>        &quot;inputValidation.errorBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Input validation background color for information severity.</em></p>
+<pre><code>        &quot;inputValidation.infoBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Input validation foreground color for information severity.</em></p>
+<pre><code>        &quot;inputValidation.infoForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Input validation border color for information severity.</em></p>
+<pre><code>        &quot;inputValidation.infoBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Input validation background color for information warning.</em></p>
+<pre><code>        &quot;inputValidation.warningBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Input validation foreground color for warning severity.</em></p>
+<pre><code>        &quot;inputValidation.warningForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Input validation border color for warning severity.</em></p>
+<pre><code>        &quot;inputValidation.warningBorder&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="scrollbar-control">Scrollbar control</h4>
+<p class="desc"><em>Scrollbar slider shadow to indicate that the view is scrolled.</em></p>
+<pre><code>        &quot;scrollbar.shadow&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Scrollbar slider background color when clicked on.</em></p>
+<pre><code>        &quot;scrollbarSlider.activeBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Scrollbar slider background color.</em></p>
+<pre><code>        &quot;scrollbarSlider.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Scrollbar slider background color when hovering.</em></p>
+<pre><code>        &quot;scrollbarSlider.hoverBackground&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="badge">Badge</h4>
+<p><span class="subHead">Badges are small information labels, for example, search results count.</span class="subHead"></p>
+<p class="desc"><em>Badge foreground color.</em></p>
+<pre><code>        &quot;badge.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Badge background color.</em></p>
+<pre><code>        &quot;badge.background&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="progress-bar">Progress bar</h4>
+<p class="desc"><em>Background color of the progress bar shown for long running operations.</em></p>
+<pre><code>        &quot;progressBar.background&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="lists-and-trees">Lists and trees</h4>
+<p><span class="subHead">Colors for list and trees like the File Explorer. An active list/tree has keyboard focus, an inactive does not.</span class="subHead"></p>
+<p class="desc"><em>List/Tree background color for the selected item when the list/tree is active.</em></p>
+<pre><code>        &quot;list.activeSelectionBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>List/Tree foreground color for the selected item when the list/tree is active.</em></p>
+<pre><code>        &quot;list.activeSelectionForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>List/Tree icon foreground color for the selected item when the list/tree is active. An active list/tree has keyboard focus, an inactive does not.</em></p>
+<pre><code>        &quot;list.activeSelectionIconForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>List/Tree drag and drop background when moving items around using the mouse.</em></p>
+<pre><code>        &quot;list.dropBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>List/Tree background color for the focused item when the list/tree is active.</em></p>
+<pre><code>        &quot;list.focusBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>List/Tree foreground color for the focused item when the list/tree is active. An active list/tree has keyboard focus, an inactive does not.</em></p>
+<pre><code>        &quot;list.focusForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>List/Tree foreground color of the match highlights on actively focused items when searching inside the list/tree.</em></p>
+<pre><code>        &quot;list.focusHighlightForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>List/Tree outline color for the focused item when the list/tree is active. An active list/tree has keyboard focus, an inactive does not.</em></p>
+<pre><code>        &quot;list.focusOutline&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>List/Tree outline color for the focused item when the list/tree is active and selected. An active list/tree has keyboard focus, an inactive does not.</em></p>
+<pre><code>        &quot;list.focusAndSelectionOutline&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>List/Tree foreground color of the match highlights when searching inside the list/tree.</em></p>
+<pre><code>        &quot;list.highlightForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>List/Tree background when hovering over items using the mouse.</em></p>
+<pre><code>        &quot;list.hoverBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>List/Tree foreground when hovering over items using the mouse.</em></p>
+<pre><code>        &quot;list.hoverForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>List/Tree background color for the selected item when the list/tree is inactive.</em></p>
+<pre><code>        &quot;list.inactiveSelectionBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>List/Tree foreground color for the selected item when the list/tree is inactive. An active list/tree has keyboard focus, an inactive does not.</em></p>
+<pre><code>        &quot;list.inactiveSelectionForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>List/Tree icon foreground color for the selected item when the list/tree is inactive. An active list/tree has keyboard focus, an inactive does not.</em></p>
+<pre><code>        &quot;list.inactiveSelectionIconForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>List background color for the focused item when the list is inactive. An active list has keyboard focus, an inactive does not. Currently only supported in lists.</em></p>
+<pre><code>        &quot;list.inactiveFocusBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>List/Tree outline color for the focused item when the list/tree is inactive. An active list/tree has keyboard focus, an inactive does not.</em></p>
+<pre><code>        &quot;list.inactiveFocusOutline&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>List/Tree foreground color for invalid items, for example an unresolved root in explorer.</em></p>
+<pre><code>        &quot;list.invalidItemForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color of list items containing errors.</em></p>
+<pre><code>        &quot;list.errorForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color of list items containing warnings.</em></p>
+<pre><code>        &quot;list.warningForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>List/Tree Filter background color of typed text when searching inside the list/tree.</em></p>
+<pre><code>        &quot;listFilterWidget.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>List/Tree Filter Widget's outline color of typed text when searching inside the list/tree.</em></p>
+<pre><code>        &quot;listFilterWidget.outline&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>List/Tree Filter Widget's outline color when no match is found of typed text when searching inside the list/tree.</em></p>
+<pre><code>        &quot;listFilterWidget.noMatchesOutline&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of the filtered matches in lists and trees.</em></p>
+<pre><code>        &quot;list.filterMatchBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color of the filtered matches in lists and trees.</em></p>
+<pre><code>        &quot;list.filterMatchBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>List/Tree foreground color for items that are deemphasized.</em></p>
+<pre><code>        &quot;list.deemphasizedForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Tree Widget's stroke color for indent guides.</em></p>
+<pre><code>        &quot;tree.indentGuidesStroke&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Tree stroke color for the indentation guides.</em></p>
+<pre><code>        &quot;tree.tableColumnsBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color for odd table rows.</em></p>
+<pre><code>        &quot;tree.tableOddRowsBackground&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="activity-bar">Activity Bar</h4>
+<p><span class="subHead">The Activity Bar is displayed either on the far left or right of the workbench and allows fast switching between views of the Side Bar.</span class="subHead"></p>
+<p class="desc"><em>Activity Bar background color.</em></p>
+<pre><code>        &quot;activityBar.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Drag and drop feedback color for the activity bar items. The activity bar is showing on the far left or right and allows to switch between views of the side bar.</em></p>
+<pre><code>        &quot;activityBar.dropBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Activity Bar foreground color (for example used for the icons).</em></p>
+<pre><code>        &quot;activityBar.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Activity Bar item foreground color when it is inactive.</em></p>
+<pre><code>        &quot;activityBar.inactiveForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Activity Bar border color with the Side Bar.</em></p>
+<pre><code>        &quot;activityBar.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Activity notification badge background color.</em></p>
+<pre><code>        &quot;activityBarBadge.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Activity notification badge foreground color.</em></p>
+<pre><code>        &quot;activityBarBadge.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Activity Bar active indicator border color.</em></p>
+<pre><code>        &quot;activityBar.activeBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Activity Bar optional background color for the active element.</em></p>
+<pre><code>        &quot;activityBar.activeBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Activity bar focus border color for the active item.</em></p>
+<pre><code>        &quot;activityBar.activeFocusBorder&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="side-bar">Side Bar</h4>
+<p><span class="subHead">The Side Bar contains views like the Explorer and Search.</span class="subHead"></p>
+<p class="desc"><em>Side Bar background color.</em></p>
+<pre><code>        &quot;sideBar.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Side Bar foreground color. The Side Bar is the container for views like Explorer and Search.</em></p>
+<pre><code>        &quot;sideBar.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Side Bar border color on the side separating the editor.</em></p>
+<pre><code>        &quot;sideBar.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Drag and drop feedback color for the side bar sections. The color should have transparency so that the side bar sections can still shine through.</em></p>
+<pre><code>        &quot;sideBar.dropBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Side Bar title foreground color.</em></p>
+<pre><code>        &quot;sideBarTitle.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Side Bar section header background color.</em></p>
+<pre><code>        &quot;sideBarSectionHeader.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Side Bar section header foreground color.</em></p>
+<pre><code>        &quot;sideBarSectionHeader.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Side bar section header border color.</em></p>
+<pre><code>        &quot;sideBarSectionHeader.border&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="minimap">Minimap</h4>
+<p><span class="subHead">The Minimap shows a minified version of the current file.</span class="subHead"></p>
+<p class="desc"><em>Highlight color for matches from search within files.</em></p>
+<pre><code>        &quot;minimap.findMatchHighlight&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Highlight color for the editor selection.</em></p>
+<pre><code>        &quot;minimap.selectionHighlight&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Highlight color for errors within the editor.</em></p>
+<pre><code>        &quot;minimap.errorHighlight&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Highlight color for warnings within the editor.</em></p>
+<pre><code>        &quot;minimap.warningHighlight&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Minimap background color.</em></p>
+<pre><code>        &quot;minimap.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Minimap marker color for repeating editor selections.</em></p>
+<pre><code>        &quot;minimap.selectionOccurrenceHighlight&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Opacity of foreground elements rendered in the minimap. For example, '#000000c0' will render the elements with 75% opacity.</em></p>
+<pre><code>        &quot;minimap.foregroundOpacity&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Minimap slider background color.</em></p>
+<pre><code>        &quot;minimapSlider.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Minimap slider background color when hovering.</em></p>
+<pre><code>        &quot;minimapSlider.hoverBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Minimap slider background color when clicked on.</em></p>
+<pre><code>        &quot;minimapSlider.activeBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Minimap gutter color for added content.</em></p>
+<pre><code>        &quot;minimapGutter.addedBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Minimap gutter color for modified content.</em></p>
+<pre><code>        &quot;minimapGutter.modifiedBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Minimap gutter color for deleted content.</em></p>
+<pre><code>        &quot;minimapGutter.deletedBackground&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="editor-groups--tabs">Editor Groups &amp; Tabs</h4>
+<p><span class="subHead">Editor Groups are the containers of editors. There can be many editor groups. A Tab is the container of an editor. Multiple Tabs can be opened in one editor group.</span class="subHead"></p>
+<p class="desc"><em>Color to separate multiple editor groups from each other.</em></p>
+<pre><code>        &quot;editorGroup.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color when dragging editors around.</em></p>
+<pre><code>        &quot;editorGroup.dropBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of the editor group title header when Tabs are disabled (set 'workbench.editor.showTabs': false).</em></p>
+<pre><code>        &quot;editorGroupHeader.noTabsBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of the Tabs container.</em></p>
+<pre><code>        &quot;editorGroupHeader.tabsBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color below the editor tabs control when tabs are enabled.</em></p>
+<pre><code>        &quot;editorGroupHeader.tabsBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color between editor group header and editor (below breadcrumbs if enabled).</em></p>
+<pre><code>        &quot;editorGroupHeader.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of an empty editor group.</em></p>
+<pre><code>        &quot;editorGroup.emptyBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color of an empty editor group that is focused.</em></p>
+<pre><code>        &quot;editorGroup.focusedEmptyBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color of text shown over editors when dragging files. This text informs the user that they can hold shift to drop into the editor.</em></p>
+<pre><code>        &quot;editorGroup.dropIntoPromptForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of text shown over editors when dragging files. This text informs the user that they can hold shift to drop into the editor.</em></p>
+<pre><code>        &quot;editorGroup.dropIntoPromptBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color of text shown over editors when dragging files. This text informs the user that they can hold shift to drop into the editor.</em></p>
+<pre><code>        &quot;editorGroup.dropIntoPromptBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Active Tab background color in an active group.</em></p>
+<pre><code>        &quot;tab.activeBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Active Tab background color in an inactive editor group.</em></p>
+<pre><code>        &quot;tab.unfocusedActiveBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Active Tab foreground color in an active group.</em></p>
+<pre><code>        &quot;tab.activeForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border to separate Tabs from each other.</em></p>
+<pre><code>        &quot;tab.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Bottom border for the active tab.</em></p>
+<pre><code>        &quot;tab.activeBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Bottom border for the active tab in an inactive editor group.</em></p>
+<pre><code>        &quot;tab.unfocusedActiveBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Top border for the active tab.</em></p>
+<pre><code>        &quot;tab.activeBorderTop&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Top border for the active tab in an inactive editor group</em></p>
+<pre><code>        &quot;tab.unfocusedActiveBorderTop&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border on the right of the last pinned editor to separate from unpinned editors.</em></p>
+<pre><code>        &quot;tab.lastPinnedBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Inactive Tab background color.</em></p>
+<pre><code>        &quot;tab.inactiveBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Inactive Tab background color in an unfocused group</em></p>
+<pre><code>        &quot;tab.unfocusedInactiveBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Inactive Tab foreground color in an active group.</em></p>
+<pre><code>        &quot;tab.inactiveForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Active tab foreground color in an inactive editor group.</em></p>
+<pre><code>        &quot;tab.unfocusedActiveForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Inactive tab foreground color in an inactive editor group.</em></p>
+<pre><code>        &quot;tab.unfocusedInactiveForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Tab background color when hovering</em></p>
+<pre><code>        &quot;tab.hoverBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Tab background color in an unfocused group when hovering</em></p>
+<pre><code>        &quot;tab.unfocusedHoverBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Tab foreground color when hovering</em></p>
+<pre><code>        &quot;tab.hoverForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Tab foreground color in an unfocused group when hovering</em></p>
+<pre><code>        &quot;tab.unfocusedHoverForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border to highlight tabs when hovering</em></p>
+<pre><code>        &quot;tab.hoverBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border to highlight tabs in an unfocused group when hovering</em></p>
+<pre><code>        &quot;tab.unfocusedHoverBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border on the top of modified (dirty) active tabs in an active group.</em></p>
+<pre><code>        &quot;tab.activeModifiedBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border on the top of modified (dirty) inactive tabs in an active group.</em></p>
+<pre><code>        &quot;tab.inactiveModifiedBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border on the top of modified (dirty) active tabs in an unfocused group.</em></p>
+<pre><code>        &quot;tab.unfocusedActiveModifiedBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border on the top of modified (dirty) inactive tabs in an unfocused group.</em></p>
+<pre><code>        &quot;tab.unfocusedInactiveModifiedBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of the editor pane visible on the left and right side of the centered editor layout.</em></p>
+<pre><code>        &quot;editorPane.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color to separate two editors from each other when shown side by side in an editor group from top to bottom.</em></p>
+<pre><code>        &quot;sideBySideEditor.horizontalBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color to separate two editors from each other when shown side by side in an editor group from left to right.</em></p>
+<pre><code>        &quot;sideBySideEditor.verticalBorder&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="editor-colors">Editor colors</h4>
+<p><span class="subHead">The most prominent editor colors are the token colors used for syntax highlighting and are based on the language grammar installed. These colors are defined by the Color Theme but can also be customized with the <em>editor.tokenColorCustomizations</em> setting. See <a href="https:**//code.visualstudio.com/docs/getstarted/themes#_customizing-a-color-theme">Customizing a Color Theme</a> for details on updating a Color Theme and the available token types.</span class="subHead">
+<p class="desc"><All other editor colors are listed here: em>Editor background color.</em></p>
+<pre><code>        &quot;editor.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Editor default foreground color.</em></p>
+<pre><code>        &quot;editor.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color of editor line numbers.</em></p>
+<pre><code>        &quot;editorLineNumber.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color of the active editor line number.</em></p>
+<pre><code>        &quot;editorLineNumber.activeForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The background color of the editor cursor. Allows customizing the color of a character overlapped by a block cursor.</em></p>
+<pre><code>        &quot;editorCursor.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color of the editor cursor.</em></p>
+<pre><code>        &quot;editorCursor.foreground&quot;: &quot;&quot;
+</code></pre>
+<p> 
+<span class="subHead">Selection highlight: Selection colors are visible when selecting one or more characters. In addition to the selection also all regions with the same content are highlighted.</span class="subHead"></p>
+<p class="desc"><em>Color of the editor selection.</em></p>
+<pre><code>        &quot;editor.selectionBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color of the selected text for high contrast.</em></p>
+<pre><code>        &quot;editor.selectionForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color of the selection in an inactive editor. The color must not be opaque so as not to hide underlying decorations.</em></p>
+<pre><code>        &quot;editor.inactiveSelectionBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color for regions with the same content as the selection. The color must not be opaque so as not to hide underlying decorations.</em></p>
+<pre><code>        &quot;editor.selectionHighlightBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color for regions with the same content as the selection.</em></p>
+<pre><code>        &quot;editor.selectionHighlightBorder&quot;: &quot;&quot;
+</code></pre>
+<p> 
+<span class="subHead">Occurrences: Word highlight colors are visible when the cursor is inside a symbol or a word. Depending on the language support available for the file type, all matching references and declarations are highlighted and read and write accesses get different colors. If document symbol language support is not available, this falls back to word highlighting.</span class="subHead"></p>
+<p class="desc"><em>Background color of a symbol during read-access, for example when reading a variable. The color must not be opaque so as not to hide underlying decorations.</em></p>
+<pre><code>        &quot;editor.wordHighlightBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color of a symbol during read-access, for example when reading a variable.</em></p>
+<pre><code>        &quot;editor.wordHighlightBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of a symbol during write-access, for example when writing to a variable. The color must not be opaque so as not to hide underlying decorations.</em></p>
+<pre><code>        &quot;editor.wordHighlightspan class="subHead"Background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color of a symbol during write-access, for example when writing to a variable.</em></p>
+<pre><code>        &quot;editor.wordHighlightspan class="subHead"Border&quot;: &quot;&quot;
+</code></pre>
+<p> 
+<span class="subHead">Find matches: Find colors depend on the current find string in the Find/Replace dialog.</span class="subHead"></p>
+<p class="desc"><em>Color of the current search match.</em></p>
+<pre><code>        &quot;editor.findMatchBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color of the other search matches. The color must not be opaque so as not to hide underlying decorations.</em></p>
+<pre><code>        &quot;editor.findMatchHighlightBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color the range limiting the search (Enable 'Find in Selection' in the find widget). The color must not be opaque so as not to hide underlying decorations.</em></p>
+<pre><code>        &quot;editor.findRangeHighlightBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color of the current search match.</em></p>
+<pre><code>        &quot;editor.findMatchBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color of the other search matches.</em></p>
+<pre><code>        &quot;editor.findMatchHighlightBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color the range limiting the search (Enable 'Find in Selection' in the find widget).</em></p>
+<pre><code>        &quot;editor.findRangeHighlightBorder&quot;: &quot;&quot;
+</code></pre>
+<p> 
+<span class="subHead">Search Editor Matches: Search Editor colors highlight results in a Search Editor. This can be configured separately from other find matches in order to better differentiate between different classes of match in the same editor.</span class="subHead"></p>
+<p class="desc"><em>Color of the editor's results.</em></p>
+<pre><code>        &quot;searchEditor.findMatchBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color of the editor's results.</em></p>
+<pre><code>        &quot;searchEditor.findMatchBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Search editor text input box border.</em></p>
+<pre><code>        &quot;searchEditor.textInputBorder&quot;: &quot;&quot;
+</code></pre>
+<p> 
+<span class="subHead">Hover Highlight: The hover highlight is shown behind the symbol for which a hover is shown.</span class="subHead"></p>
+<p class="desc"><em>Highlight below the word for which a hover is shown. The color must not be opaque so as not to hide underlying decorations.</em></p>
+<pre><code>        &quot;editor.hoverHighlightBackground&quot;: &quot;&quot;
+</code></pre>
+<p> 
+<span class="subHead">Line Highlight: The current line is typically shown as either background highlight or a border (not both).</span class="subHead"></p>
+<p class="desc"><em>Background color for the highlight of line at the cursor position.</em></p>
+<pre><code>        &quot;editor.lineHighlightBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color for the border around the line at the cursor position.</em></p>
+<pre><code>        &quot;editor.lineHighlightBorder&quot;: &quot;&quot;
+</code></pre>
+<p> 
+<span class="subHead">The color for unicode highlights</span class="subHead"></p>
+<p class="desc"><em>Border color used to highlight unicode characters.</em></p>
+<pre><code>        &quot;editorUnicodeHighlight.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color used to highlight unicode characters.</em></p>
+<pre><code>        &quot;editorUnicodeHighlight.background&quot;: &quot;&quot;
+</code></pre>
+<p> 
+<span class="subHead">Link: The link color is visible when clicking on a link.</span class="subHead"></p>
+<p class="desc"><em>Color of active links.</em></p>
+<pre><code>        &quot;editorLink.activeForeground&quot;: &quot;&quot;
+</code></pre>
+<p> 
+<span class="subHead">Range Highlight: The range highlight is visible when selecting a search result.</span class="subHead"></p>
+<p class="desc"><em>Background color of highlighted ranges, used by Quick Open, Symbol in File and Find features. The color must not be opaque so as not to hide underlying decorations.</em></p>
+<pre><code>        &quot;editor.rangeHighlightBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of the border around highlighted ranges.</em></p>
+<pre><code>        &quot;editor.rangeHighlightBorder&quot;: &quot;&quot;
+</code></pre>
+<p> 
+<span class="subHead">The symbol highlight is visible when navigating to a symbol via a command such as Go to Definition.</span class="subHead"></p>
+<p class="desc"><em>Background color of highlighted symbol. The color must not be opaque so as not to hide underlying decorations.</em></p>
+<pre><code>        &quot;editor.symbolHighlightBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of the border around highlighted symbols.</em></p>
+<pre><code>        &quot;editor.symbolHighlightBorder&quot;: &quot;&quot;
+</code></pre>
+<p> 
+<span class="subHead">To see the editor white spaces, enable Toggle Render Whitespace.</span class="subHead"></p>
+<p class="desc"><em>Color of whitespace characters in the editor.</em></p>
+<pre><code>        &quot;editorWhitespace.foreground&quot;: &quot;&quot;
+</code></pre>
+<p> 
+<span class="subHead">To see the editor indent guides, set 'editor.guides.indentation': 'true and 'editor.guides.highlightActiveIndentation': true.'</span class="subHead"></p>
+<p class="desc"><em>Color of the editor indentation guides.</em></p>
+<pre><code>        &quot;editorIndentGuide.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color of the active editor indentation guide.</em></p>
+<pre><code>        &quot;editorIndentGuide.activeBackground&quot;: &quot;&quot;
+</code></pre>
+<p> 
+<span class="subHead">To see the editor inline hints, set 'editor.inlineSuggest.enabled': 'true.',</span class="subHead"></p>
+<p class="desc"><em>Background color of inline hints.</em></p>
+<pre><code>        &quot;editorInlayHint.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color of inline hints.</em></p>
+<pre><code>        &quot;editorInlayHint.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color of inline hints for types</em></p>
+<pre><code>        &quot;editorInlayHint.typeForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of inline hints for types</em></p>
+<pre><code>        &quot;editorInlayHint.typeBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color of inline hints for parameters</em></p>
+<pre><code>        &quot;editorInlayHint.parameterForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of inline hints for parameters</em></p>
+<pre><code>        &quot;editorInlayHint.parameterBackground&quot;: &quot;&quot;
+</code></pre>
+<p> 
+<span class="subHead">To see editor rulers, define their location with 'editor.rulers',</span class="subHead"></p>
+<p class="desc"><em>Color of the editor rulers.</em></p>
+<pre><code>        &quot;editorRuler.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color when the editor is in linked editing mode.</em></p>
+<pre><code>        &quot;editor.linkedEditingBackground&quot;: &quot;&quot;
+</code></pre>
+<p> 
+<p class="desc"><CodeLens: em>Foreground color of an editor CodeLens.</em></p>
+<pre><code>        &quot;editorCodeLens.foreground&quot;: &quot;&quot;
+</code></pre>
+<p> 
+<p class="desc"><Lightbulb: em>The color used for the lightbulb actions icon.</em></p>
+<pre><code>        &quot;editorLightBulb.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The color used for the lightbulb auto fix actions icon.</em></p>
+<pre><code>        &quot;editorLightBulbAutoFix.foreground&quot;: &quot;&quot;
+</code></pre>
+<p> 
+<p class="desc"><Bracket matches: em>Background color behind matching brackets.</em></p>
+<pre><code>        &quot;editorBracketMatch.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color for matching brackets boxes.</em></p>
+<pre><code>        &quot;editorBracketMatch.border&quot;: &quot;&quot;
+</code></pre>
+<p> 
+<p class="desc"><Bracket pair colorization: em>Foreground color of brackets (1). Requires enabling bracket pair colorization.</em></p>
+<pre><code>        &quot;editorBracketHighlight.foreground1&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color of brackets (2). Requires enabling bracket pair colorization.</em></p>
+<pre><code>        &quot;editorBracketHighlight.foreground2&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color of brackets (3). Requires enabling bracket pair colorization.</em></p>
+<pre><code>        &quot;editorBracketHighlight.foreground3&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color of brackets (4). Requires enabling bracket pair colorization.</em></p>
+<pre><code>        &quot;editorBracketHighlight.foreground4&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color of brackets (5). Requires enabling bracket pair colorization.</em></p>
+<pre><code>        &quot;editorBracketHighlight.foreground5&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color of brackets (6). Requires enabling bracket pair colorization.</em></p>
+<pre><code>        &quot;editorBracketHighlight.foreground6&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color of unexpected brackets.</em></p>
+<pre><code>        &quot;editorBracketHighlight.unexpectedBracket.foreground&quot;: &quot;&quot;
+</code></pre>
+<p> 
+<p class="desc"><Bracket pair guides: em>Background color of active bracket pair guides (1). Requires enabling bracket pair guides.</em></p>
+<pre><code>        &quot;editorBracketPairGuide.activeBackground1&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of active bracket pair guides (2). Requires enabling bracket pair guides.</em></p>
+<pre><code>        &quot;editorBracketPairGuide.activeBackground2&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of active bracket pair guides (3). Requires enabling bracket pair guides.</em></p>
+<pre><code>        &quot;editorBracketPairGuide.activeBackground3&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of active bracket pair guides (4). Requires enabling bracket pair guides.</em></p>
+<pre><code>        &quot;editorBracketPairGuide.activeBackground4&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of active bracket pair guides (5). Requires enabling bracket pair guides.</em></p>
+<pre><code>        &quot;editorBracketPairGuide.activeBackground5&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of active bracket pair guides (6). Requires enabling bracket pair guides.</em></p>
+<pre><code>        &quot;editorBracketPairGuide.activeBackground6&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of inactive bracket pair guides (1). Requires enabling bracket pair guides.</em></p>
+<pre><code>        &quot;editorBracketPairGuide.background1&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of inactive bracket pair guides (2). Requires enabling bracket pair guides.</em></p>
+<pre><code>        &quot;editorBracketPairGuide.background2&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of inactive bracket pair guides (3). Requires enabling bracket pair guides.</em></p>
+<pre><code>        &quot;editorBracketPairGuide.background3&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of inactive bracket pair guides (4). Requires enabling bracket pair guides.</em></p>
+<pre><code>        &quot;editorBracketPairGuide.background4&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of inactive bracket pair guides (5). Requires enabling bracket pair guides.</em></p>
+<pre><code>        &quot;editorBracketPairGuide.background5&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of inactive bracket pair guides (6). Requires enabling bracket pair guides.</em></p>
+<pre><code>        &quot;editorBracketPairGuide.background6&quot;: &quot;&quot;
+</code></pre>
+<p> 
+<p class="desc"><Folding: em>Background color for folded ranges. The color must not be opaque so as not to hide underlying decorations.</em></p>
+<pre><code>        &quot;editor.foldBackground&quot;: &quot;&quot;
+</code></pre>
+<p> 
+<span class="subHead">Overview ruler: This ruler is located beneath the scroll bar on the right edge of the editor and gives an overview of the decorations in the editor.</span class="subHead"></p>
+<p class="desc"><em>Background color of the editor overview ruler. Only used when the minimap is enabled and placed on the right side of the editor.</em></p>
+<pre><code>        &quot;editorOverviewRuler.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color of the overview ruler border.</em></p>
+<pre><code>        &quot;editorOverviewRuler.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Overview ruler marker color for find matches. The color must not be opaque so as not to hide underlying decorations.</em></p>
+<pre><code>        &quot;editorOverviewRuler.findMatchForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Overview ruler marker color for highlighted ranges, like by the Quick Open, Symbol in File and Find features. The color must not be opaque so as not to hide underlying decorations.</em></p>
+<pre><code>        &quot;editorOverviewRuler.rangeHighlightForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Overview ruler marker color for selection highlights. The color must not be opaque so as not to hide underlying decorations.</em></p>
+<pre><code>        &quot;editorOverviewRuler.selectionHighlightForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Overview ruler marker color for symbol highlights. The color must not be opaque so as not to hide underlying decorations.</em></p>
+<pre><code>        &quot;editorOverviewRuler.wordHighlightForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Overview ruler marker color for write-access symbol highlights. The color must not be opaque so as not to hide underlying decorations.</em></p>
+<pre><code>        &quot;editorOverviewRuler.wordHighlightspan class="subHead"Foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Overview ruler marker color for modified content.</em></p>
+<pre><code>        &quot;editorOverviewRuler.modifiedForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Overview ruler marker color for added content.</em></p>
+<pre><code>        &quot;editorOverviewRuler.addedForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Overview ruler marker color for deleted content.</em></p>
+<pre><code>        &quot;editorOverviewRuler.deletedForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Overview ruler marker color for errors.</em></p>
+<pre><code>        &quot;editorOverviewRuler.errorForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Overview ruler marker color for warnings.</em></p>
+<pre><code>        &quot;editorOverviewRuler.warningForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Overview ruler marker color for infos.</em></p>
+<pre><code>        &quot;editorOverviewRuler.infoForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Overview ruler marker color for matching brackets.</em></p>
+<pre><code>        &quot;editorOverviewRuler.bracketMatchForeground&quot;: &quot;&quot;
+</code></pre>
+<p> 
+<p class="desc"><Errors and warnings: em>Foreground color of error squiggles in the editor.</em></p>
+<pre><code>        &quot;editorError.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color of error boxes in the editor.</em></p>
+<pre><code>        &quot;editorError.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of error text in the editor. The color must not be opaque so as not to hide underlying decorations.</em></p>
+<pre><code>        &quot;editorError.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color of warning squiggles in the editor.</em></p>
+<pre><code>        &quot;editorWarning.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color of warning boxes in the editor.</em></p>
+<pre><code>        &quot;editorWarning.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of warning text in the editor. The color must not be opaque so as not to hide underlying decorations.</em></p>
+<pre><code>        &quot;editorWarning.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color of info squiggles in the editor.</em></p>
+<pre><code>        &quot;editorInfo.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color of info boxes in the editor.</em></p>
+<pre><code>        &quot;editorInfo.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of info text in the editor. The color must not be opaque so as not to hide underlying decorations.</em></p>
+<pre><code>        &quot;editorInfo.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color of hints in the editor.</em></p>
+<pre><code>        &quot;editorHint.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color of hint boxes in the editor.</em></p>
+<pre><code>        &quot;editorHint.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The color used for the problems error icon.</em></p>
+<pre><code>        &quot;problemsErrorIcon.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The color used for the problems warning icon.</em></p>
+<pre><code>        &quot;problemsWarningIcon.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The color used for the problems info icon.</em></p>
+<pre><code>        &quot;problemsInfoIcon.foreground&quot;: &quot;&quot;
+</code></pre>
+<p> 
+<p class="desc"><Unused source code: em>Border color of unnecessary (unused) source code in the editor.</em></p>
+<pre><code>        &quot;editorUnnecessaryCode.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Opacity of unnecessary (unused) source code in the editor. For example, '#000000c0' will render the code with 75% opacity. For high contrast themes, use the 'editorUnnecessaryCode.border' theme color to underline unnecessary code instead of fading it out.</em></p>
+<pre><code>        &quot;editorUnnecessaryCode.opacity&quot;: &quot;&quot;
+</code></pre>
+<p> 
+<p class="desc"><The gutter contains the glyph margins and the line numbers: em>Background color of the editor gutter. The gutter contains the glyph margins and the line numbers.</em></p>
+<pre><code>        &quot;editorGutter.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Editor gutter background color for lines that are modified.</em></p>
+<pre><code>        &quot;editorGutter.modifiedBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Editor gutter background color for lines that are added.</em></p>
+<pre><code>        &quot;editorGutter.addedBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Editor gutter background color for lines that are deleted.</em></p>
+<pre><code>        &quot;editorGutter.deletedBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Editor gutter decoration color for commenting ranges.</em></p>
+<pre><code>        &quot;editorGutter.commentRangeForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color of the folding control in the editor gutter.</em></p>
+<pre><code>        &quot;editorGutter.foldingControlForeground&quot;: &quot;&quot;
+</code></pre>
+<p> 
+<p class="desc"><The editor comments widget can be seen when reviewing pull requests: em>Color of borders and arrow for resolved comments.</em></p>
+<pre><code>        &quot;editorCommentsWidget.resolvedBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color of borders and arrow for unresolved comments.</em></p>
+<pre><code>        &quot;editorCommentsWidget.unresolvedBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color of background for comment ranges.</em></p>
+<pre><code>        &quot;editorCommentsWidget.rangeBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color of border for comment ranges.</em></p>
+<pre><code>        &quot;editorCommentsWidget.rangeBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color of background for currently selected or hovered comment range.</em></p>
+<pre><code>        &quot;editorCommentsWidget.rangeActiveBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color of border for currently selected or hovered comment range.</em></p>
+<pre><code>        &quot;editorCommentsWidget.rangeActiveBorder&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="diff-editor-colors">Diff editor colors</h4>
+<p><span class="subHead">For coloring inserted and removed text, use either a background or a border color but not both.</span class="subHead"></p>
+<p class="desc"><em>Background color for text that got inserted. The color must not be opaque so as not to hide underlying decorations.</em></p>
+<pre><code>        &quot;diffEditor.insertedTextBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Outline color for the text that got inserted.</em></p>
+<pre><code>        &quot;diffEditor.insertedTextBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color for text that got removed. The color must not be opaque so as not to hide underlying decorations.</em></p>
+<pre><code>        &quot;diffEditor.removedTextBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Outline color for text that got removed.</em></p>
+<pre><code>        &quot;diffEditor.removedTextBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color between the two text editors.</em></p>
+<pre><code>        &quot;diffEditor.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color of the diff editor's diagonal fill. The diagonal fill is used in side-by-side diff views.</em></p>
+<pre><code>        &quot;diffEditor.diagonalFill&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color for lines that got inserted. The color must not be opaque so as not to hide underlying decorations.</em></p>
+<pre><code>        &quot;diffEditor.insertedLineBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color for lines that got removed. The color must not be opaque so as not to hide underlying decorations.</em></p>
+<pre><code>        &quot;diffEditor.removedLineBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color for the margin where lines got inserted.</em></p>
+<pre><code>        &quot;diffEditorGutter.insertedLineBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color for the margin where lines got removed.</em></p>
+<pre><code>        &quot;diffEditorGutter.removedLineBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Diff overview ruler foreground for inserted content.</em></p>
+<pre><code>        &quot;diffEditorOverview.insertedForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Diff overview ruler foreground for removed content.</em></p>
+<pre><code>        &quot;diffEditorOverview.removedForeground&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="editor-widget-colors">Editor widget colors</h4>
+<p><span class="subHead">The Editor widget is shown in front of the editor content. Examples are the Find/Replace dialog, the suggestion widget, and the editor hover.</span class="subHead"></p>
+<p class="desc"><em>Foreground color of editor widgets, such as find/replace.</em></p>
+<pre><code>        &quot;editorWidget.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of editor widgets, such as Find/Replace.</em></p>
+<pre><code>        &quot;editorWidget.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color of the editor widget unless the widget does not contain a border or defines its own border color.</em></p>
+<pre><code>        &quot;editorWidget.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color of the resize bar of editor widgets. The color is only used if the widget chooses to have a resize border and if the color is not overridden by a widget.</em></p>
+<pre><code>        &quot;editorWidget.resizeBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of the suggestion widget.</em></p>
+<pre><code>        &quot;editorSuggestWidget.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color of the suggestion widget.</em></p>
+<pre><code>        &quot;editorSuggestWidget.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color of the suggestion widget.</em></p>
+<pre><code>        &quot;editorSuggestWidget.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color of the match highlights in the suggest widget when an item is focused.</em></p>
+<pre><code>        &quot;editorSuggestWidget.focusHighlightForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color of the match highlights in the suggestion widget.</em></p>
+<pre><code>        &quot;editorSuggestWidget.highlightForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of the selected entry in the suggestion widget.</em></p>
+<pre><code>        &quot;editorSuggestWidget.selectedBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color of the selected entry in the suggest widget.</em></p>
+<pre><code>        &quot;editorSuggestWidget.selectedForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Icon foreground color of the selected entry in the suggest widget.</em></p>
+<pre><code>        &quot;editorSuggestWidget.selectedIconForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color of the suggest widget status.</em></p>
+<pre><code>        &quot;editorSuggestWidgetStatus.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color of the editor hover.</em></p>
+<pre><code>        &quot;editorHoverWidget.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of the editor hover.</em></p>
+<pre><code>        &quot;editorHoverWidget.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color of the editor hover.</em></p>
+<pre><code>        &quot;editorHoverWidget.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color of the active item in the parameter hint.</em></p>
+<pre><code>        &quot;editorHoverWidget.highlightForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of the editor hover status bar.</em></p>
+<pre><code>        &quot;editorHoverWidget.statusBarBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color of the ghost text shown by inline completion providers and the suggest preview.</em></p>
+<pre><code>        &quot;editorGhostText.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of the ghost text in the editor.</em></p>
+<pre><code>        &quot;editorGhostText.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color of the ghost text shown by inline completion providers and the suggest preview.</em></p>
+<pre><code>        &quot;editorGhostText.foreground&quot;: &quot;&quot;
+</code></pre>
+<p> 
+<span class="subHead">The Debug Exception widget is a peek view that shows in the editor when debug stops at an exception.</span class="subHead"></p>
+<p class="desc"><em>Exception widget background color.</em></p>
+<pre><code>        &quot;debugExceptionWidget.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Exception widget border color.</em></p>
+<pre><code>        &quot;debugExceptionWidget.border&quot;: &quot;&quot;
+</code></pre>
+<p> 
+<span class="subHead">The editor marker view shows when navigating to errors and warnings in the editor (Go to Next Error or Warning command).</span class="subHead"></p>
+<p class="desc"><em>Editor marker navigation widget background.</em></p>
+<pre><code>        &quot;editorMarkerNavigation.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Editor marker navigation widget error color.</em></p>
+<pre><code>        &quot;editorMarkerNavigationError.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Editor marker navigation widget warning color.</em></p>
+<pre><code>        &quot;editorMarkerNavigationWarning.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Editor marker navigation widget info color.</em></p>
+<pre><code>        &quot;editorMarkerNavigationInfo.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Editor marker navigation widget error heading background.</em></p>
+<pre><code>        &quot;editorMarkerNavigationError.headerBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Editor marker navigation widget warning heading background.</em></p>
+<pre><code>        &quot;editorMarkerNavigationWarning.headerBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Editor marker navigation widget info heading background.</em></p>
+<pre><code>        &quot;editorMarkerNavigationInfo.headerBackground&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="peek-view-colors">Peek view colors</h4>
+<p><span class="subHead">Peek views are used to show references and declarations as a view inside the editor.</span class="subHead">
+<p class="desc"><Peek view: em>Color of the peek view borders and arrow.</em></p>
+<pre><code>        &quot;peekView.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of the peek view editor.</em></p>
+<pre><code>        &quot;peekViewEditor.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of the gutter in the peek view editor.</em></p>
+<pre><code>        &quot;peekViewEditorGutter.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Match highlight color in the peek view editor.</em></p>
+<pre><code>        &quot;peekViewEditor.matchHighlightBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Match highlight border color in the peek view editor.</em></p>
+<pre><code>        &quot;peekViewEditor.matchHighlightBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of the peek view result list.</em></p>
+<pre><code>        &quot;peekViewResult.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color for file nodes in the peek view result list.</em></p>
+<pre><code>        &quot;peekViewResult.fileForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color for line nodes in the peek view result list.</em></p>
+<pre><code>        &quot;peekViewResult.lineForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Match highlight color in the peek view result list.</em></p>
+<pre><code>        &quot;peekViewResult.matchHighlightBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of the selected entry in the peek view result list.</em></p>
+<pre><code>        &quot;peekViewResult.selectionBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color of the selected entry in the peek view result list.</em></p>
+<pre><code>        &quot;peekViewResult.selectionForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of the peek view title area.</em></p>
+<pre><code>        &quot;peekViewTitle.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color of the peek view title info.</em></p>
+<pre><code>        &quot;peekViewTitleDescription.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color of the peek view title.</em></p>
+<pre><code>        &quot;peekViewTitleLabel.foreground&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="merge-conflicts-colors">Merge conflicts colors</h4>
+<p><span class="subHead">Merge conflict decorations are shown when the editor contains special diff ranges.</span class="subHead">
+<p class="desc"><Merge ranges: em>Current header background in inline merge conflicts. The color must not be opaque so as not to hide underlying decorations.</em></p>
+<pre><code>        &quot;merge.currentHeaderBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Current content background in inline merge conflicts. The color must not be opaque so as not to hide underlying decorations.</em></p>
+<pre><code>        &quot;merge.currentContentBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Incoming header background in inline merge conflicts. The color must not be opaque so as not to hide underlying decorations.</em></p>
+<pre><code>        &quot;merge.incomingHeaderBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Incoming content background in inline merge conflicts. The color must not be opaque so as not to hide underlying decorations.</em></p>
+<pre><code>        &quot;merge.incomingContentBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color on headers and the splitter in inline merge conflicts.</em></p>
+<pre><code>        &quot;merge.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Common ancestor content background in inline merge-conflicts. The color must not be opaque so as not to hide underlying decorations.</em></p>
+<pre><code>        &quot;merge.commonContentBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Common ancestor header background in inline merge-conflicts. The color must not be opaque so as not to hide underlying decorations.</em></p>
+<pre><code>        &quot;merge.commonHeaderBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Current overview ruler foreground for inline merge conflicts.</em></p>
+<pre><code>        &quot;editorOverviewRuler.currentContentForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Incoming overview ruler foreground for inline merge conflicts.</em></p>
+<pre><code>        &quot;editorOverviewRuler.incomingContentForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Common ancestor overview ruler foreground for inline merge conflicts.</em></p>
+<pre><code>        &quot;editorOverviewRuler.commonContentForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The background color for changes.</em></p>
+<pre><code>        &quot;mergeEditor.change.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The background color for word changes.</em></p>
+<pre><code>        &quot;mergeEditor.change.word.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The border color of unhandled unfocused conflicts.</em></p>
+<pre><code>        &quot;mergeEditor.conflict.unhandledUnfocused.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The border color of unhandled focused conflicts.</em></p>
+<pre><code>        &quot;mergeEditor.conflict.unhandledFocused.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The border color of handled unfocused conflicts.</em></p>
+<pre><code>        &quot;mergeEditor.conflict.handledUnfocused.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The border color of handled focused conflicts.</em></p>
+<pre><code>        &quot;mergeEditor.conflict.handledFocused.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for changes in input 1.</em></p>
+<pre><code>        &quot;mergeEditor.conflict.handled.minimapOverViewRuler&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for changes in input 1.</em></p>
+<pre><code>        &quot;mergeEditor.conflict.unhandled.minimapOverViewRuler&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="panel-colors">Panel colors</h4>
+<p><span class="subHead">Panels are shown below the editor area and contain views like Output and Integrated Terminal.</span class="subHead"></p>
+<p class="desc"><em>Panel background color.</em></p>
+<pre><code>        &quot;panel.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Panel border color to separate the panel from the editor.</em></p>
+<pre><code>        &quot;panel.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Drag and drop feedback color for the panel titles. Panels are shown below the editor area and contain views like output and integrated terminal.</em></p>
+<pre><code>        &quot;panel.dropBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color for the active panel title.</em></p>
+<pre><code>        &quot;panelTitle.activeBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Title color for the active panel.</em></p>
+<pre><code>        &quot;panelTitle.activeForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Title color for the inactive panel.</em></p>
+<pre><code>        &quot;panelTitle.inactiveForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Input box border for inputs in the panel.</em></p>
+<pre><code>        &quot;panelInput.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Panel section border color used when multiple views are stacked horizontally in the panel. Panels are shown below the editor area and contain views like output and integrated terminal.</em></p>
+<pre><code>        &quot;panelSection.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Drag and drop feedback color for the panel sections. The color should have transparency so that the panel sections can still shine through. Panels are shown below the editor area and contain views like output and integrated terminal.</em></p>
+<pre><code>        &quot;panelSection.dropBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Panel section header background color. Panels are shown below the editor area and contain views like output and integrated terminal.</em></p>
+<pre><code>        &quot;panelSectionHeader.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Panel section header foreground color. Panels are shown below the editor area and contain views like output and integrated terminal.</em></p>
+<pre><code>        &quot;panelSectionHeader.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Panel section header border color used when multiple views are stacked vertically in the panel. Panels are shown below the editor area and contain views like output and integrated terminal.</em></p>
+<pre><code>        &quot;panelSectionHeader.border&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="status-bar-colors">Status Bar colors</h4>
+<p><span class="subHead">The Status Bar is shown in the bottom of the workbench.</span class="subHead"></p>
+<p class="desc"><em>Standard Status Bar background color.</em></p>
+<pre><code>        &quot;statusBar.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Status Bar foreground color.</em></p>
+<pre><code>        &quot;statusBar.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Status Bar border color separating the Status Bar and editor.</em></p>
+<pre><code>        &quot;statusBar.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Status Bar background color when a program is being debugged.</em></p>
+<pre><code>        &quot;statusBar.debuggingBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Status Bar foreground color when a program is being debugged.</em></p>
+<pre><code>        &quot;statusBar.debuggingForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Status Bar border color separating the Status Bar and editor when a program is being debugged.</em></p>
+<pre><code>        &quot;statusBar.debuggingBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Status Bar foreground color when no folder is opened.</em></p>
+<pre><code>        &quot;statusBar.noFolderForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Status Bar background color when no folder is opened.</em></p>
+<pre><code>        &quot;statusBar.noFolderBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Status Bar border color separating the Status Bar and editor when no folder is opened.</em></p>
+<pre><code>        &quot;statusBar.noFolderBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Status Bar item background color when clicking.</em></p>
+<pre><code>        &quot;statusBarItem.activeBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Status Bar item background color when hovering.</em></p>
+<pre><code>        &quot;statusBarItem.hoverBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Status Bar prominent items foreground color.</em></p>
+<pre><code>        &quot;statusBarItem.prominentForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Status Bar prominent items background color.</em></p>
+<pre><code>        &quot;statusBarItem.prominentBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Status Bar prominent items background color when hovering.</em></p>
+<pre><code>        &quot;statusBarItem.prominentHoverBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color for the remote indicator on the status bar.</em></p>
+<pre><code>        &quot;statusBarItem.remoteBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color for the remote indicator on the status bar.</em></p>
+<pre><code>        &quot;statusBarItem.remoteForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Status bar error items background color. Error items stand out from other status bar entries to indicate error conditions.</em></p>
+<pre><code>        &quot;statusBarItem.errorBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Status bar error items foreground color. Error items stand out from other status bar entries to indicate error conditions.</em></p>
+<pre><code>        &quot;statusBarItem.errorForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Status bar warning items background color. Warning items stand out from other status bar entries to indicate warning conditions. The status bar is shown in the bottom of the window.</em></p>
+<pre><code>        &quot;statusBarItem.warningBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Status bar warning items foreground color. Warning items stand out from other status bar entries to indicate warning conditions. The status bar is shown in the bottom of the window.</em></p>
+<pre><code>        &quot;statusBarItem.warningForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Status bar item background color when hovering an item that contains two hovers. The status bar is shown in the bottom of the window.</em></p>
+<pre><code>        &quot;statusBarItem.compactHoverBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Status bar item border color when focused on keyboard navigation. The status bar is shown in the bottom of the window.</em></p>
+<pre><code>        &quot;statusBarItem.focusBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color for the settings profile entry on the status bar.</em></p>
+<pre><code>        &quot;statusBarItem.settingsProfilesForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color for the settings profile entry on the status bar.</em></p>
+<pre><code>        &quot;statusBarItem.settingsProfilesBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Status bar border color when focused on keyboard navigation. The status bar is shown in the bottom of the window.</em></p>
+<pre><code>        &quot;statusBar.focusBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Title Bar colors:</em></p>
+<p> 
+<span class="subHead">Prominent items stand out from other Status Bar entries to indicate importance. One example is the Toggle Tab Key Moves Focus command change mode indicator.</span class="subHead"></p>
+<p class="desc"><em>Title Bar background when the window is active.</em></p>
+<pre><code>        &quot;titleBar.activeBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Title Bar foreground when the window is active.</em></p>
+<pre><code>        &quot;titleBar.activeForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Title Bar background when the window is inactive.</em></p>
+<pre><code>        &quot;titleBar.inactiveBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Title Bar foreground when the window is inactive.</em></p>
+<pre><code>        &quot;titleBar.inactiveForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Title bar border color.</em></p>
+<pre><code>        &quot;titleBar.border&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="menu-bar-colors">Menu Bar colors</h4>
+<p class="desc"><em>Foreground color of the selected menu item in the menubar.</em></p>
+<pre><code>        &quot;menubar.selectionForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of the selected menu item in the menubar.</em></p>
+<pre><code>        &quot;menubar.selectionBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color of the selected menu item in the menubar.</em></p>
+<pre><code>        &quot;menubar.selectionBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color of menu items.</em></p>
+<pre><code>        &quot;menu.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of menu items.</em></p>
+<pre><code>        &quot;menu.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color of the selected menu item in menus.</em></p>
+<pre><code>        &quot;menu.selectionForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of the selected menu item in menus.</em></p>
+<pre><code>        &quot;menu.selectionBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color of the selected menu item in menus.</em></p>
+<pre><code>        &quot;menu.selectionBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color of a separator menu item in menus.</em></p>
+<pre><code>        &quot;menu.separatorBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color of menus.</em></p>
+<pre><code>        &quot;menu.border&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="command-center-colors">Command Center colors</h4>
+<p class="desc"><em>Foreground color of the command center</em></p>
+<pre><code>        &quot;commandCenter.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Active foreground color of the command center</em></p>
+<pre><code>        &quot;commandCenter.activeForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of the command center</em></p>
+<pre><code>        &quot;commandCenter.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Active background color of the command center</em></p>
+<pre><code>        &quot;commandCenter.activeBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color of the command center</em></p>
+<pre><code>        &quot;commandCenter.border&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="notification-colors">Notification colors</h4>
+<span class="subHead">Notification Toasts: Notification toasts slide up from the bottom-right of the workbench.</span class="subHead">
+ 
+<span class="subHead"></span class="subHead">
+<p class="desc"><Notification Center: em>Notification Center border color.</em></p>
+<pre><code>        &quot;notificationCenter.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Notification Center header foreground color.</em></p>
+<pre><code>        &quot;notificationCenterHeader.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Notification Center header background color.</em></p>
+<pre><code>        &quot;notificationCenterHeader.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Notification toast border color.</em></p>
+<pre><code>        &quot;notificationToast.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Notification foreground color.</em></p>
+<pre><code>        &quot;notifications.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Notification background color.</em></p>
+<pre><code>        &quot;notifications.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Notification border color separating from other notifications in the Notification Center.</em></p>
+<pre><code>        &quot;notifications.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Notification links foreground color.</em></p>
+<pre><code>        &quot;notificationLink.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The color used for the notification error icon.</em></p>
+<pre><code>        &quot;notificationsErrorIcon.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The color used for the notification warning icon.</em></p>
+<pre><code>        &quot;notificationsWarningIcon.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The color used for the notification info icon.</em></p>
+<pre><code>        &quot;notificationsInfoIcon.foreground&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="banner-colors">Banner colors</h4>
+<p><span class="subHead">The banner appears below the title bar and spans the entire width of the workbench when visible.</span class="subHead"></p>
+<p class="desc"><em>Banner background color.</em></p>
+<pre><code>        &quot;banner.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Banner foreground color.</em></p>
+<pre><code>        &quot;banner.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color for the icon in front of the banner text.</em></p>
+<pre><code>        &quot;banner.iconForeground&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="extensions-colors">Extensions colors</h4>
+<p class="desc"><em>Extension view button foreground color (for example Install button).</em></p>
+<pre><code>        &quot;extensionButton.prominentForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Extension view button background color.</em></p>
+<pre><code>        &quot;extensionButton.prominentBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Extension view button background hover color.</em></p>
+<pre><code>        &quot;extensionButton.prominentHoverBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color for the remote badge in the extensions view.</em></p>
+<pre><code>        &quot;extensionBadge.remoteBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color for the remote badge in the extensions view.</em></p>
+<pre><code>        &quot;extensionBadge.remoteForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The icon color for extension ratings.</em></p>
+<pre><code>        &quot;extensionIcon.starForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The icon color for extension verified publisher.</em></p>
+<pre><code>        &quot;extensionIcon.verifiedForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The icon color for pre-release extension.</em></p>
+<pre><code>        &quot;extensionIcon.preReleaseForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The icon color for extension sponsor.</em></p>
+<pre><code>        &quot;extensionIcon.sponsorForeground&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="quick-picker-colors">Quick picker colors</h4>
+<p class="desc"><em>Quick picker (Quick Open) color for grouping borders.</em></p>
+<pre><code>        &quot;pickerGroup.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Quick picker (Quick Open) color for grouping labels.</em></p>
+<pre><code>        &quot;pickerGroup.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Quick input background color. The quick input widget is the container for views like the color theme picker.</em></p>
+<pre><code>        &quot;quickInput.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Quick input foreground color. The quick input widget is the container for views like the color theme picker.</em></p>
+<pre><code>        &quot;quickInput.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Quick picker background color for the focused item.</em></p>
+<pre><code>        &quot;quickInputList.focusBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Quick picker foreground color for the focused item.</em></p>
+<pre><code>        &quot;quickInputList.focusForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Quick picker icon foreground color for the focused item.</em></p>
+<pre><code>        &quot;quickInputList.focusIconForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Quick picker title background color. The quick picker widget is the container for pickers like the Command Palette.</em></p>
+<pre><code>        &quot;quickInputTitle.background&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="keybinding-label-colors">Keybinding label colors</h4>
+<span class="subHead"></Keybinding labels are shown when there is a keybinding associated with a command. An example of the keybinding label can be seen in the Command Palette: span class="subHead">
+<span class="subHeadKeybinding label: "></span class="subHead">
+<span class="subHeadUsages of the keybinding label include (but are not limited to): ">The Command Palette,</span class="subHead">
+ 
+<span class="subHead">The Keyboard Shortcuts editor,</span class="subHead">
+ 
+<span class="subHead">The Keyboard Shortcuts recorder modal,</span class="subHead">
+ 
+<span class="subHead">The feature contribution section of an extension's marketplace page,</span class="subHead">
+ 
+<p class="desc"><The following customizations are available: em>Keybinding label background color. The keybinding label is used to represent a keyboard shortcut.</em></p>
+<pre><code>        &quot;keybindingLabel.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Keybinding label foreground color. The keybinding label is used to represent a keyboard shortcut.</em></p>
+<pre><code>        &quot;keybindingLabel.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Keybinding label border color. The keybinding label is used to represent a keyboard shortcut.</em></p>
+<pre><code>        &quot;keybindingLabel.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Keybinding label border bottom color. The keybinding label is used to represent a keyboard shortcut.</em></p>
+<pre><code>        &quot;keybindingLabel.bottomBorder&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="keyboard-shortcut-table-colors">Keyboard shortcut table colors</h4>
+<p class="desc"><em>Background color for the keyboard shortcuts table header.</em></p>
+<pre><code>        &quot;keybindingTable.headerBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color for the keyboard shortcuts table alternating rows.</em></p>
+<pre><code>        &quot;keybindingTable.rowsBackground&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="integrated-terminal-colors">Integrated Terminal colors</h4>
+<p class="desc"><em>The background of the Integrated Terminal's viewport.</em></p>
+<pre><code>        &quot;terminal.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The color of the border that separates split panes within the terminal. This defaults to panel.border.</em></p>
+<pre><code>        &quot;terminal.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The default foreground color of the Integrated Terminal.</em></p>
+<pre><code>        &quot;terminal.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>'Black' ANSI color in the terminal.</em></p>
+<pre><code>        &quot;terminal.ansiBlack&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>'Blue' ANSI color in the terminal.</em></p>
+<pre><code>        &quot;terminal.ansiBlue&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>'BrightBlack' ANSI color in the terminal.</em></p>
+<pre><code>        &quot;terminal.ansiBrightBlack&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>'BrightBlue' ANSI color in the terminal.</em></p>
+<pre><code>        &quot;terminal.ansiBrightBlue&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>'BrightCyan' ANSI color in the terminal.</em></p>
+<pre><code>        &quot;terminal.ansiBrightCyan&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>'BrightGreen' ANSI color in the terminal.</em></p>
+<pre><code>        &quot;terminal.ansiBrightGreen&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>'BrightMagenta' ANSI color in the terminal.</em></p>
+<pre><code>        &quot;terminal.ansiBrightMagenta&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>'BrightRed' ANSI color in the terminal.</em></p>
+<pre><code>        &quot;terminal.ansiBrightRed&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>'BrightWhite' ANSI color in the terminal.</em></p>
+<pre><code>        &quot;terminal.ansiBrightWhite&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>'BrightYellow' ANSI color in the terminal.</em></p>
+<pre><code>        &quot;terminal.ansiBrightYellow&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>'Cyan' ANSI color in the terminal.</em></p>
+<pre><code>        &quot;terminal.ansiCyan&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>'Green' ANSI color in the terminal.</em></p>
+<pre><code>        &quot;terminal.ansiGreen&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>'Magenta' ANSI color in the terminal.</em></p>
+<pre><code>        &quot;terminal.ansiMagenta&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>'Red' ANSI color in the terminal.</em></p>
+<pre><code>        &quot;terminal.ansiRed&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>'White' ANSI color in the terminal.</em></p>
+<pre><code>        &quot;terminal.ansiWhite&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>'Yellow' ANSI color in the terminal.</em></p>
+<pre><code>        &quot;terminal.ansiYellow&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The selection background color of the terminal.</em></p>
+<pre><code>        &quot;terminal.selectionBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The selection foreground color of the terminal. When this is null the selection foreground will be retained and have the minimum contrast ratio feature applied.</em></p>
+<pre><code>        &quot;terminal.selectionForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color of the current search match in the terminal. The color must not be opaque so as not to hide underlying terminal content.</em></p>
+<pre><code>        &quot;terminal.findMatchBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color of the current search match in the terminal.</em></p>
+<pre><code>        &quot;terminal.findMatchBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color of the other search matches in the terminal. The color must not be opaque so as not to hide underlying terminal content.</em></p>
+<pre><code>        &quot;terminal.findMatchHighlightBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border color of the other search matches in the terminal.</em></p>
+<pre><code>        &quot;terminal.findMatchHighlightBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The background color of the terminal cursor. Allows customizing the color of a character overlapped by a block cursor.</em></p>
+<pre><code>        &quot;terminalCursor.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color of the terminal cursor.</em></p>
+<pre><code>        &quot;terminalCursor.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The background color when dragging on top of terminals. The color should have transparency so that the terminal contents can still shine through.</em></p>
+<pre><code>        &quot;terminal.dropBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Border on the side of the terminal tab in the panel. This defaults to tab.activeBorder.</em></p>
+<pre><code>        &quot;terminal.tab.activeBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The default terminal command decoration background color.</em></p>
+<pre><code>        &quot;terminalCommandDecoration.defaultBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The terminal command decoration background color for successful commands.</em></p>
+<pre><code>        &quot;terminalCommandDecoration.successBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The terminal command decoration background color for error commands.</em></p>
+<pre><code>        &quot;terminalCommandDecoration.errorBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The overview ruler cursor color.</em></p>
+<pre><code>        &quot;terminalOverviewRuler.cursorForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Overview ruler marker color for find matches in the terminal.</em></p>
+<pre><code>        &quot;terminalOverviewRuler.findMatchForeground&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="_debug-colors">_Debug colors</h4>
+<p class="desc"><em>Debug toolbar background color.</em></p>
+<pre><code>        &quot;debugToolBar.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Debug toolbar border color.</em></p>
+<pre><code>        &quot;debugToolBar.border&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of the top stack frame highlight in the editor.</em></p>
+<pre><code>        &quot;editor.stackFrameHighlightBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of the focused stack frame highlight in the editor.</em></p>
+<pre><code>        &quot;editor.focusedStackFrameHighlightBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color for the debug inline value text.</em></p>
+<pre><code>        &quot;editor.inlineValuesForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color for the debug inline value background.</em></p>
+<pre><code>        &quot;editor.inlineValuesBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color for a label shown in the CALL STACK view when the debugger breaks on an exception</em></p>
+<pre><code>        &quot;debugView.exceptionLabelForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color for a label shown in the CALL STACK view when the debugger breaks on an exception</em></p>
+<pre><code>        &quot;debugView.exceptionLabelBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color for a label in the CALL STACK view showing the current session's or thread's state</em></p>
+<pre><code>        &quot;debugView.stateLabelForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color for a label in the CALL STACK view showing the current session's or thread's state</em></p>
+<pre><code>        &quot;debugView.stateLabelBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color used to highlight value changes in the debug views (ie. in the Variables view)</em></p>
+<pre><code>        &quot;debugView.valueChangedHighlight&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color for the token names shown in debug views (ie. the Variables or Watch view)</em></p>
+<pre><code>        &quot;debugTokenExpression.name&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color for the token values shown in debug views</em></p>
+<pre><code>        &quot;debugTokenExpression.value&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color for strings in debug views</em></p>
+<pre><code>        &quot;debugTokenExpression.string&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color for booleans in debug views</em></p>
+<pre><code>        &quot;debugTokenExpression.boolean&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color for numbers in debug views</em></p>
+<pre><code>        &quot;debugTokenExpression.number&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color for expression errors in debug views</em></p>
+<pre><code>        &quot;debugTokenExpression.error&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="testing-colors">Testing colors</h4>
+<p class="desc"><em>Color for the 'failed' icon in the test explorer.</em></p>
+<pre><code>        &quot;testing.iconFailed&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color for the 'Errored' icon in the test explorer.</em></p>
+<pre><code>        &quot;testing.iconErrored&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color for the 'passed' icon in the test explorer.</em></p>
+<pre><code>        &quot;testing.iconPassed&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color for 'run' icons in the editor.</em></p>
+<pre><code>        &quot;testing.runAction&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color for the 'Queued' icon in the test explorer.</em></p>
+<pre><code>        &quot;testing.iconQueued&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color for the 'Unset' icon in the test explorer.</em></p>
+<pre><code>        &quot;testing.iconUnset&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color for the 'Skipped' icon in the test explorer.</em></p>
+<pre><code>        &quot;testing.iconSkipped&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color of the peek view borders and arrow.</em></p>
+<pre><code>        &quot;testing.peekBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color of the peek view borders and arrow.</em></p>
+<pre><code>        &quot;testing.peekHeaderBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Text color of test error messages shown inline in the editor.</em></p>
+<pre><code>        &quot;testing.message.error.decorationForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Margin color beside error messages shown inline in the editor.</em></p>
+<pre><code>        &quot;testing.message.error.lineBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Text color of test info messages shown inline in the editor.</em></p>
+<pre><code>        &quot;testing.message.info.decorationForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Margin color beside info messages shown inline in the editor.</em></p>
+<pre><code>        &quot;testing.message.info.lineBackground&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="welcome-page-colors">Welcome page colors</h4>
+<p class="desc"><em>Background color for the Welcome page.</em></p>
+<pre><code>        &quot;welcomePage.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color for the Welcome page progress bars.</em></p>
+<pre><code>        &quot;welcomePage.progress.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color for the Welcome page progress bars.</em></p>
+<pre><code>        &quot;welcomePage.progress.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color for the tiles on the Get Started page.</em></p>
+<pre><code>        &quot;welcomePage.tileBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Hover background color for the tiles on the Get Started.</em></p>
+<pre><code>        &quot;welcomePage.tileHoverBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Shadow color for the Welcome page walkthrough category buttons.</em></p>
+<pre><code>        &quot;welcomePage.tileShadow&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color for the embedded editors on the Interactive Playground.</em></p>
+<pre><code>        &quot;walkThrough.embeddedEditorBackground&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="source-control-colors">Source Control colors</h4>
+<p class="desc"><em>SCM Provider separator border.</em></p>
+<pre><code>        &quot;scm.providerBorder&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="git-colors">Git colors</h4>
+<p class="desc"><em>Color for added Git resources. Used for file labels and the SCM viewlet.</em></p>
+<pre><code>        &quot;gitDecoration.addedResourceForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color for modified Git resources. Used for file labels and the SCM viewlet.</em></p>
+<pre><code>        &quot;gitDecoration.modifiedResourceForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color for deleted Git resources. Used for file labels and the SCM viewlet.</em></p>
+<pre><code>        &quot;gitDecoration.deletedResourceForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color for renamed or copied Git resources. Used for file labels and the SCM viewlet.</em></p>
+<pre><code>        &quot;gitDecoration.renamedResourceForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color for staged modifications git decorations. Used for file labels and the SCM viewlet.</em></p>
+<pre><code>        &quot;gitDecoration.stageModifiedResourceForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color for staged deletions git decorations. Used for file labels and the SCM viewlet.</em></p>
+<pre><code>        &quot;gitDecoration.stageDeletedResourceForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color for untracked Git resources. Used for file labels and the SCM viewlet.</em></p>
+<pre><code>        &quot;gitDecoration.untrackedResourceForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color for ignored Git resources. Used for file labels and the SCM viewlet.</em></p>
+<pre><code>        &quot;gitDecoration.ignoredResourceForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color for conflicting Git resources. Used for file labels and the SCM viewlet.</em></p>
+<pre><code>        &quot;gitDecoration.conflictingResourceForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color for submodule resources.</em></p>
+<pre><code>        &quot;gitDecoration.submoduleResourceForeground&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="settings-editor-colors">Settings Editor colors</h4>
+<p class="desc"><Note: These colors are for the GUI settings editor which can be opened with the Preferences: em>The foreground color for a section header or active title.</em></p>
+<pre><code>        &quot;settings.headerForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The line that indicates a modified setting.</em></p>
+<pre><code>        &quot;settings.modifiedItemIndicator&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Dropdown background.</em></p>
+<pre><code>        &quot;settings.dropdownBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Dropdown foreground.</em></p>
+<pre><code>        &quot;settings.dropdownForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Dropdown border.</em></p>
+<pre><code>        &quot;settings.dropdownBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Dropdown list border.</em></p>
+<pre><code>        &quot;settings.dropdownListBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Checkbox background.</em></p>
+<pre><code>        &quot;settings.checkboxBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Checkbox foreground.</em></p>
+<pre><code>        &quot;settings.checkboxForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Checkbox border.</em></p>
+<pre><code>        &quot;settings.checkboxBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The background color of a settings row when hovered.</em></p>
+<pre><code>        &quot;settings.rowHoverBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Text input box background.</em></p>
+<pre><code>        &quot;settings.textInputBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Text input box foreground.</em></p>
+<pre><code>        &quot;settings.textInputForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Text input box border.</em></p>
+<pre><code>        &quot;settings.textInputBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Number input box background.</em></p>
+<pre><code>        &quot;settings.numberInputBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Number input box foreground.</em></p>
+<pre><code>        &quot;settings.numberInputForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Number input box border.</em></p>
+<pre><code>        &quot;settings.numberInputBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of a focused setting row.</em></p>
+<pre><code>        &quot;settings.focusedRowBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The color of the row's top and bottom border when the row is focused.</em></p>
+<pre><code>        &quot;settings.focusedRowBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The color of the header container border.</em></p>
+<pre><code>        &quot;settings.headerBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The color of the Settings editor splitview sash border.</em></p>
+<pre><code>        &quot;settings.sashBorder&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="breadcrumbs-colors">Breadcrumbs colors</h4>
+<p class="desc"><The theme colors for breadcrumbs navigation: em>Color of breadcrumb items.</em></p>
+<pre><code>        &quot;breadcrumb.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of breadcrumb items.</em></p>
+<pre><code>        &quot;breadcrumb.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color of focused breadcrumb items.</em></p>
+<pre><code>        &quot;breadcrumb.focusForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color of selected breadcrumb items.</em></p>
+<pre><code>        &quot;breadcrumb.activeSelectionForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of breadcrumb item picker.</em></p>
+<pre><code>        &quot;breadcrumbPicker.background&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="snippets-colors">Snippets colors</h4>
+<p class="desc"><The theme colors for snippets: em>Highlight background color of a snippet tabstop.</em></p>
+<pre><code>        &quot;editor.snippetTabstopHighlightBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Highlight border color of a snippet tabstop.</em></p>
+<pre><code>        &quot;editor.snippetTabstopHighlightBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Highlight background color of the final tabstop of a snippet.</em></p>
+<pre><code>        &quot;editor.snippetFinalTabstopHighlightBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Highlight border color of the final tabstop of a snippet.</em></p>
+<pre><code>        &quot;editor.snippetFinalTabstopHighlightBorder&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="symbol-icons-colors">Symbol Icons colors</h4>
+<p class="desc"><The theme colors for symbol icons that appears in the Outline view, breadcrumb navigation, and suggest widget: em>The foreground color for array symbols.</em></p>
+<pre><code>        &quot;symbolIcon.arrayForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for boolean symbols.</em></p>
+<pre><code>        &quot;symbolIcon.booleanForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for class symbols.</em></p>
+<pre><code>        &quot;symbolIcon.classForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for color symbols.</em></p>
+<pre><code>        &quot;symbolIcon.colorForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for constant symbols.</em></p>
+<pre><code>        &quot;symbolIcon.constantForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for constructor symbols.</em></p>
+<pre><code>        &quot;symbolIcon.constructorForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for enumerator symbols.</em></p>
+<pre><code>        &quot;symbolIcon.enumeratorForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for enumerator member symbols.</em></p>
+<pre><code>        &quot;symbolIcon.enumeratorMemberForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for event symbols.</em></p>
+<pre><code>        &quot;symbolIcon.eventForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for field symbols.</em></p>
+<pre><code>        &quot;symbolIcon.fieldForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for file symbols.</em></p>
+<pre><code>        &quot;symbolIcon.fileForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for folder symbols.</em></p>
+<pre><code>        &quot;symbolIcon.folderForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for function symbols.</em></p>
+<pre><code>        &quot;symbolIcon.functionForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for interface symbols.</em></p>
+<pre><code>        &quot;symbolIcon.interfaceForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for key symbols.</em></p>
+<pre><code>        &quot;symbolIcon.keyForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for keyword symbols.</em></p>
+<pre><code>        &quot;symbolIcon.keywordForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for method symbols.</em></p>
+<pre><code>        &quot;symbolIcon.methodForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for module symbols.</em></p>
+<pre><code>        &quot;symbolIcon.moduleForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for namespace symbols.</em></p>
+<pre><code>        &quot;symbolIcon.namespaceForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for null symbols.</em></p>
+<pre><code>        &quot;symbolIcon.nullForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for number symbols.</em></p>
+<pre><code>        &quot;symbolIcon.numberForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for object symbols.</em></p>
+<pre><code>        &quot;symbolIcon.objectForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for operator symbols.</em></p>
+<pre><code>        &quot;symbolIcon.operatorForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for package symbols.</em></p>
+<pre><code>        &quot;symbolIcon.packageForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for property symbols.</em></p>
+<pre><code>        &quot;symbolIcon.propertyForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for reference symbols.</em></p>
+<pre><code>        &quot;symbolIcon.referenceForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for snippet symbols.</em></p>
+<pre><code>        &quot;symbolIcon.snippetForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for string symbols.</em></p>
+<pre><code>        &quot;symbolIcon.stringForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for struct symbols.</em></p>
+<pre><code>        &quot;symbolIcon.structForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for text symbols.</em></p>
+<pre><code>        &quot;symbolIcon.textForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for type parameter symbols.</em></p>
+<pre><code>        &quot;symbolIcon.typeParameterForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for unit symbols.</em></p>
+<pre><code>        &quot;symbolIcon.unitForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The foreground color for variable symbols.</em></p>
+<pre><code>        &quot;symbolIcon.variableForeground&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="_debug-icons-colors">_Debug Icons colors</h4>
+<p class="desc"><em>Icon color for breakpoints.</em></p>
+<pre><code>        &quot;debugIcon.breakpointForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Icon color for disabled breakpoints.</em></p>
+<pre><code>        &quot;debugIcon.breakpointDisabledForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Icon color for unverified breakpoints.</em></p>
+<pre><code>        &quot;debugIcon.breakpointUnverifiedForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Icon color for the current breakpoint stack frame.</em></p>
+<pre><code>        &quot;debugIcon.breakpointCurrentStackframeForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Icon color for all breakpoint stack frames.</em></p>
+<pre><code>        &quot;debugIcon.breakpointStackframeForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Debug toolbar icon for start debugging.</em></p>
+<pre><code>        &quot;debugIcon.startForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Debug toolbar icon for pause.</em></p>
+<pre><code>        &quot;debugIcon.pauseForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Debug toolbar icon for stop.</em></p>
+<pre><code>        &quot;debugIcon.stopForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Debug toolbar icon for disconnect.</em></p>
+<pre><code>        &quot;debugIcon.disconnectForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Debug toolbar icon for restart.</em></p>
+<pre><code>        &quot;debugIcon.restartForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Debug toolbar icon for step over.</em></p>
+<pre><code>        &quot;debugIcon.stepOverForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Debug toolbar icon for step into.</em></p>
+<pre><code>        &quot;debugIcon.stepIntoForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Debug toolbar icon for step over.</em></p>
+<pre><code>        &quot;debugIcon.stepOutForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Debug toolbar icon for continue.</em></p>
+<pre><code>        &quot;debugIcon.continueForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Debug toolbar icon for step back.</em></p>
+<pre><code>        &quot;debugIcon.stepBackForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color for info messages in debug REPL console.</em></p>
+<pre><code>        &quot;debugConsole.infoForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color for warning messages in debug REPL console.</em></p>
+<pre><code>        &quot;debugConsole.warningForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color for error messages in debug REPL console.</em></p>
+<pre><code>        &quot;debugConsole.errorForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color for source filenames in debug REPL console.</em></p>
+<pre><code>        &quot;debugConsole.sourceForeground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Foreground color for debug console input marker icon.</em></p>
+<pre><code>        &quot;debugConsoleInputIcon.foreground&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="notebook-colors">Notebook colors</h4>
+<p class="desc"><em>Notebook background color.</em></p>
+<pre><code>        &quot;notebook.editorBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The border color for notebook cells.</em></p>
+<pre><code>        &quot;notebook.cellBorderColor&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The background color of a cell when the cell is hovered.</em></p>
+<pre><code>        &quot;notebook.cellHoverBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The color of the notebook cell insertion indicator.</em></p>
+<pre><code>        &quot;notebook.cellInsertionIndicator&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The background color of notebook cell status bar items.</em></p>
+<pre><code>        &quot;notebook.cellStatusBarItemHoverBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The color of the separator in the cell bottom toolbar</em></p>
+<pre><code>        &quot;notebook.cellToolbarSeparator&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The color of the notebook cell editor background</em></p>
+<pre><code>        &quot;notebook.cellEditorBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The background color of a cell when the cell is focused.</em></p>
+<pre><code>        &quot;notebook.focusedCellBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The color of the cell's focus indicator borders when the cell is focused..</em></p>
+<pre><code>        &quot;notebook.focusedCellBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The color of the notebook cell editor border.</em></p>
+<pre><code>        &quot;notebook.focusedEditorBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The color of the cell's top and bottom border when a cell is focused while the primary focus is outside of the editor.</em></p>
+<pre><code>        &quot;notebook.inactiveFocusedCellBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The color of the cell's borders when multiple cells are selected.</em></p>
+<pre><code>        &quot;notebook.inactiveSelectedCellBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The Color of the notebook output container background.</em></p>
+<pre><code>        &quot;notebook.outputContainerBackgroundColor&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The border color of the notebook output container.</em></p>
+<pre><code>        &quot;notebook.outputContainerBorderColor&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The background color of a cell when the cell is selected.</em></p>
+<pre><code>        &quot;notebook.selectedCellBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The color of the cell's top and bottom border when the cell is selected but not focused.</em></p>
+<pre><code>        &quot;notebook.selectedCellBorder&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Background color of highlighted cell</em></p>
+<pre><code>        &quot;notebook.symbolHighlightBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Notebook scrollbar slider background color when clicked on.</em></p>
+<pre><code>        &quot;notebookScrollbarSlider.activeBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Notebook scrollbar slider background color.</em></p>
+<pre><code>        &quot;notebookScrollbarSlider.background&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Notebook scrollbar slider background color when hovering.</em></p>
+<pre><code>        &quot;notebookScrollbarSlider.hoverBackground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The error icon color of notebook cells in the cell status bar.</em></p>
+<pre><code>        &quot;notebookStatusErrorIcon.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The running icon color of notebook cells in the cell status bar.</em></p>
+<pre><code>        &quot;notebookStatusRunningIcon.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>The success icon color of notebook cells in the cell status bar.</em></p>
+<pre><code>        &quot;notebookStatusSuccessIcon.foreground&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="chart-colors">Chart colors</h4>
+<p class="desc"><em>Contrast color for text in charts.</em></p>
+<pre><code>        &quot;charts.foreground&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color for lines in charts.</em></p>
+<pre><code>        &quot;charts.lines&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color for red elements in charts.</em></p>
+<pre><code>        &quot;charts.red&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color for blue elements in charts.</em></p>
+<pre><code>        &quot;charts.blue&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color for yellow elements in charts.</em></p>
+<pre><code>        &quot;charts.yellow&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color for orange elements in charts.</em></p>
+<pre><code>        &quot;charts.orange&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color for green elements in charts.</em></p>
+<pre><code>        &quot;charts.green&quot;: &quot;&quot;
+</code></pre>
+<p class="desc"><em>Color for purple elements in charts.</em></p>
+<pre><code>        &quot;charts.purple&quot;: &quot;&quot;
+</code></pre>
+<hr>
+<h4 id="ports-colors">Ports Colors</h4>
+<p class="desc"><em>The color of the icon for a port that has an associated running process.</em></p>
+<pre><code>        &quot;ports.iconRunningProcessForeground&quot;: &quot;&quot;
+</code></pre>
+
+
+
+</body>
+</html>
